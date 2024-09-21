@@ -1,7 +1,7 @@
 import { TodoItem } from './TodoItem'
 
 export const TodoList = (props) => {
-  const {todos, onClickEdit, onClickSave, onClickDelete} = props;
+  const {todos, onClickEdit, onClickSave, onClickDelete, onToggleDone} = props;
   return (
     <>
       <ul>
@@ -12,6 +12,7 @@ export const TodoList = (props) => {
               onClickEdit={onClickEdit}
               onClickSave={onClickSave}
               onClickDelete={onClickDelete}
+              onToggleDone={onToggleDone}
             />
           </li>
         ))}

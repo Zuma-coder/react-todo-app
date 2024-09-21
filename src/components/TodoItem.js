@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export const TodoItem = (props) => {
-  const {todo, onClickEdit, onClickSave, onClickDelete} = props;
+  const {todo, onClickEdit, onClickSave, onClickDelete, onToggleDone} = props;
   const [editText, setEditText] = useState(todo.text);
 
   const handleChange = (event) => {
@@ -19,7 +19,12 @@ export const TodoItem = (props) => {
         </>
       ) : (
         <>
-          <p>{todo.text}</p>
+          <input
+            type="checkbox"
+            checked={todo.isDone}
+            onChange={() => onToggleDone(todo.id)}
+          />
+          <span style={{ textDecoration: todo.isDone ? 'line-through' : 'none' }}>{todo.text}</span>
           <button onClick={() => onClickEdit(todo.id)}>編集</button>
           <button onClick={() => onClickDelete(todo.id)}>削除</button>
         </>

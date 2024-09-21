@@ -14,7 +14,13 @@ export const Todo = () => {
   }
   // Todo追加
   const onClickAdd = () => {
-    setTodos([...todos, {id: uuidv4(), text: inputText, isEditing: false }]);
+    const newTodos = {
+      id: uuidv4(),
+      text: inputText,
+      isEditing: false,
+      isDone: false
+    }
+    setTodos([...todos, newTodos]);
     setInputText('');
   }
   // Todo編集
@@ -33,6 +39,12 @@ export const Todo = () => {
   const onClickDelete = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id))
   }
+  // Todo完了未完了切り替え
+  const onToggleDone = (id) => {
+    setTodos(todos.map((todo) => (
+      todo.id === id ? {...todo, isDone: !todo.isDone} : todo
+    )))
+  }
   
   return (
     <>
@@ -41,11 +53,15 @@ export const Todo = () => {
         onChange={onChangeInputText}
         onClickAdd={onClickAdd}
       />
+      <p>すべてのタスク：{todos.length}</p>
+      <p>完了済み：{todos.filter((todo) => todo.isDone).length}</p>
+      <p>未完了：{todos.filter((todo) => !todo.isDone).length}</p>
       <TodoList
         todos={todos}
         onClickEdit={onClickEdit}
         onClickSave={onClickSave}
         onClickDelete={onClickDelete}
+        onToggleDone={onToggleDone}
       />
     </>
   );
