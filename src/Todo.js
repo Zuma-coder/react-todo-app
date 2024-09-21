@@ -37,7 +37,9 @@ export const Todo = () => {
   }
   // Todo削除
   const onClickDelete = (id) => {
-    setTodos(todos.filter((todo) => todo.id !== id))
+    if(window.confirm('本当に削除してもよろしいですか？')) {
+      setTodos(todos.filter((todo) => todo.id !== id))
+    }
   }
   // Todo完了未完了切り替え
   const onToggleDone = (id) => {
